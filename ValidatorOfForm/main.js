@@ -41,12 +41,22 @@ const checkPass = (pass1, pass2) => {
 	}
 }
 
+const checkEmail = email => {
+	const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if(!email.value.match(mailformat)) {
+		showError(email, "Nieprawidłowy format adresu e-mail")
+	} else {
+		return mailformat.test(String(email).toLowerCase())
+	}
+}
+
 sendBtn.addEventListener('click', e => {
 	e.preventDefault();
 	checkForm([username, pass, pass2, email])
 	checkLength(username, 3)
 	checkLength(pass, 8)
 	checkPass(pass, pass2)
+	checkEmail(email)
 })
 
 clearBtn.addEventListener('click', e => {
