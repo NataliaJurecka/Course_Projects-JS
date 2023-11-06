@@ -29,9 +29,24 @@ const checkForm = input => {
 	})
 }
 
+const checkLength = (input, min) => {
+	if(input.value.length < min) {
+		showError(input, `${input.previousElementSibling.innerText.slice(0,-1)} składa się z min. ${min} znaków`) 
+	}
+}
+
+const checkPass = (pass1, pass2) => {
+	if(pass1.value !== pass2.value ) {
+		showError(pass2, 'Hasła nie są takie same')
+	}
+}
+
 sendBtn.addEventListener('click', e => {
 	e.preventDefault();
 	checkForm([username, pass, pass2, email])
+	checkLength(username, 3)
+	checkLength(pass, 8)
+	checkPass(pass, pass2)
 })
 
 clearBtn.addEventListener('click', e => {
