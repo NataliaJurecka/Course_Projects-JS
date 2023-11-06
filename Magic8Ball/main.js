@@ -26,15 +26,14 @@ const checkQuestion = () => {
 	if (ques !== '' && ques.slice(-1) === '?' ) {
         showAnswer()
         error.textContent = ''
-        btn8ball.classList.remove('shake-animation')
 	} else if (ques !== '' && ques.slice(-1) !== '?') {
 		error.textContent = 'Nie wiedzę "?"'
         answer.textContent = ''
-        btn8ball.classList.remove('shake-animation')
 	} else {
-		error.textContent = 'Bez pytania nie ma odpowiedzi.'
+        error.textContent = 'Bez pytania nie ma odpowiedzi.'
         answer.textContent = ''
 	}
+    btn8ball.classList.remove('shake-animation')
 }
 
 const shakeBall = () => {
