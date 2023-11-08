@@ -17,46 +17,64 @@ let seconds = 0
 let timesArr = []
 
 const handleStart = () => {
-
-    clearInterval(countTime)
+	clearInterval(countTime)
 	countTime = setInterval(() => {
-		
 		if (seconds < 9) {
 			seconds++
-		stopWatch.textContent = `${minutes}:0${seconds}`
+			stopWatch.textContent = `${minutes}:0${seconds}`
 		} else if (seconds >= 9 && seconds < 59) {
-            seconds++
-            stopWatch.textContent = `${minutes}:${seconds}`
-        } else {
-            minutes++
+			seconds++
+			stopWatch.textContent = `${minutes}:${seconds}`
+		} else {
+			minutes++
 			seconds = 0
 			stopWatch.textContent = `${minutes}:00`
-        }
+		}
 	}, 1000)
 }
 
 const handlePause = () => {
-    clearInterval(countTime)
+	clearInterval(countTime)
 }
 
 const handleStop = () => {
+	timeWatch.innerHTML = `Ostatni czas: ${stopWatch.textContent}`
 
-    timeWatch.innerHTML = `Ostatni czas: ${stopWatch.textContent}`
+	if (stopWatch.textContent !== '0:00') {
+		timeWatch.style.visibility = 'visible'
+		timesArr.push(stopWatch.textContent)
+	}
 
-    if (stopWatch.textContent !== '0:00') {
-        timeWatch.style.visibility = 'visible'
-        timesArr.push(stopWatch.textContent)
-    }
+	clearStuff()
+}
 
-    clearInterval(countTime)
-    stopWatch.textContent = `0:00`
+const handleReset = () => {
+	timeWatch.style.visibility = 'hidden'
+	timesArr = []
+	clearStuff()
+}
+
+const clearStuff = () => {
+	clearInterval(countTime)
+	stopWatch.textContent = `0:00`
+	timeList.textContent = ''
+	seconds = 0
+	minutes = 0
+}
+
+const showHistory = () => {
+
     timeList.textContent = ''
-    seconds = 0
-    minutes = 0
+    
+	timesArr.forEach(time => {
+        const newTime = document.createElement('li')
+		newTime.innerHTML = `Pomiar nr X <span>${time}</span>`
+        timeList.appendChild(newTime)
+    })
 }
 
 startBtn.addEventListener('click', handleStart)
-
 pauseBtn.addEventListener('click', handlePause)
-
 stopBtn.addEventListener('click', handleStop)
+resetBtn.addEventListener('click', handleReset)
+historyBtn.addEventListener('click', showHistory)
