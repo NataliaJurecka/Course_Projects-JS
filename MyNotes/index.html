@@ -26,7 +26,7 @@
 
         <div class="note-area">
 
-            <div class="note">
+            <!-- <div class="note">
                 <div class="note-header">
                     <h3 class="note-title">Notatka #1</h3>
                     <button class="delete-note">
@@ -37,7 +37,7 @@
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem qui molestiae cupiditate minima repellendus reprehenderit quia sed libero mollitia neque. Praesentium harum earum minus voluptate! Laborum, sed aliquam? Fuga, assumenda.
                     
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
@@ -46,7 +46,7 @@
     <div class="note-panel">
         <h2>Dodaj notetkę</h2>
         <label for="category">Wybierz kategorię</label>
-        <select id="category">
+        <select id="category" onchange="selectValue()">
             <option value="0" disabled selected> Wybierz kategorię </option>
             <option value="1">Zakupy</option>
             <option value="1">Praca</option>
