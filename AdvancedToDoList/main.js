@@ -24,12 +24,14 @@ const addTask = () => {
 		todoList.append(newToDo)
 		newToDo.setAttribute('id', ID)
 		newToDo.innerHTML = `
+        
         <p class="todo-title">${todoInput.value}</p>
         <div class="tools">
-        <button class="complete"><i class="fas fa-check"></i></button>
-        <button class="edit">Edit</i></button>
+        <button class="complete" onclick="completeTask(${ID})"><i class="fas fa-check"></i></button>
+        <button class="edit" onclick="editTask(${ID})">Edit</i></button>
         <button class="delete" onclick="deleteTask(${ID})"><i class="fas fa-times"></i></button>
         </div>
+        
         `
 		ID++
 		todoInput.value = ''
@@ -40,8 +42,14 @@ const addTask = () => {
 }
 
 const deleteTask = id => {
+    const AllTodos = todoList.querySelectorAll('li')
+    if (AllTodos.length !== 0) {
     let taskToDelete = document.getElementById(id)
     todoList.removeChild(taskToDelete)
+    errorInfo.textContent = ''
+    } else {
+        errorInfo.textContent = 'Brak zadań na liście.'
+    }
 }
 
 const completeTask = id => {
@@ -50,14 +58,24 @@ const completeTask = id => {
     taskToComplete.classList.toggle('completed')
 }
 
-const editTodo = id => {
-    let taskToEdit = id.target.closest(`li`)
-    // how to get the text from p.todo-title ?
-    popupInput.value = taskToEdit.firstChild;
-    console.log(popupInput.value);
+const editTodo = () => {
     popup.style.display = 'flex'
+    // some things to do here
 }
+
+const changeTodoText = () => {
+    // and here too
+}
+
+const closePopup = () => {
+    popup.style.display = 'none'
+	popupInfo.textContent = ''
+}
+
 
 addBtn.addEventListener('click', addTask)
 deleteBtn.addEventListener('click', deleteTask)
+completeBtn.addEventListener('click', completeTask)
 editBtn.addEventListener('click', editTodo)
+acceptBtn.addEventListener('click', changeTodoText)
+cancelBtn.addEventListener('click', closePopup)
